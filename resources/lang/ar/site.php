@@ -83,5 +83,26 @@
 
 
 return [
-    'dashboard' => 'الرئيسية'
+    'dashboard' => 'الرئيسية',
+    'users' => 'المشرفين',
+
+    'no_data_found' => 'للأسف لا توجد سجلات',
+
+
+
+    'first_name' => 'الإسم الأول',
+    'last_name' => 'الإسم الأخير',
+    'email' => 'البريد الإلكترونى',
+    'password' => 'كلمة المرور',
+    'password_confirmation' => 'تأكيد كلمة المرور',
+    'action' => 'العمليات',
+
+    'add' => 'أضف',
+    'edit' => 'تعديل',
+    'delete' => 'حذف',
+    'search' => 'بحث',
+
+    'added_successfully' => 'تم إضافة البيانات بنجاح',
+    'updated_successfully' => 'تم تعديل البيانات بنجاح',
+    'deleted_successfully' => 'تم حذف البيانات بنجاح '
 ];
