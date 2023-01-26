@@ -189,7 +189,7 @@
 
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
-                            <span class="hidden-xs">admin user</span>
+                            <span class="hidden-xs">{{ auth()->user()->first_name . ' ' . auth()->user()->last_name  }}</span>
                         </a>
                         <ul class="dropdown-menu">
 
@@ -198,8 +198,8 @@
                                 <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
 
                                 <p>
-                                    user user
-                                    {{-- {{ auth()->user()->first_name }} {{ auth()->user()->last_name }} --}}
+
+                                    {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
                                     <small>Member since 2 days</small>
                                 </p>
                             </li>
@@ -308,19 +308,19 @@
         });//end of delete
 
         // // image preview
-        // $(".image").change(function () {
-        //
-        //     if (this.files && this.files[0]) {
-        //         var reader = new FileReader();
-        //
-        //         reader.onload = function (e) {
-        //             $('.image-preview').attr('src', e.target.result);
-        //         }
-        //
-        //         reader.readAsDataURL(this.files[0]);
-        //     }
-        //
-        // });
+        $(".image").change(function () {
+
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.image-preview').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(this.files[0]);
+            }
+
+        });
 
         CKEDITOR.config.language =  "{{ app()->getLocale() }}";
 

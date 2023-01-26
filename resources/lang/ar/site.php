@@ -92,17 +92,30 @@ return [
 
     'first_name' => 'الإسم الأول',
     'last_name' => 'الإسم الأخير',
+    'img' => 'الصورة',
     'email' => 'البريد الإلكترونى',
     'password' => 'كلمة المرور',
     'password_confirmation' => 'تأكيد كلمة المرور',
     'action' => 'العمليات',
+    'permissions' => 'الصلاحيات',
+    'products' => 'المنتجات',
+    'categories' => 'الأصناف',
 
     'add' => 'أضف',
+    'create' => 'إضافة',
     'edit' => 'تعديل',
+    'update' => 'تعديل',
     'delete' => 'حذف',
     'search' => 'بحث',
+    'read' => 'عرض',
+
+    'confirm_delete' => 'تأكيد الحذف',
+    'yes' => 'نعم',
+    'no' => 'لا',
 
     'added_successfully' => 'تم إضافة البيانات بنجاح',
     'updated_successfully' => 'تم تعديل البيانات بنجاح',
-    'deleted_successfully' => 'تم حذف البيانات بنجاح '
+    'deleted_successfully' => 'تم حذف البيانات بنجاح ',
+
+    'logout' => 'تسجيل الخروج'
 ];

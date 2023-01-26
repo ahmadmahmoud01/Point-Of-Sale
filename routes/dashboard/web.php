@@ -1,19 +1,25 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// use Mcamara\LaravelLocalization\LaravelLocalization;
+use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\DashboardController\UserController;
-use \Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Mcamara\LaravelLocalization\LaravelLocalization;
+// use \Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
-    Route::prefix('/dashboard')->name('dashboard.')->group(function(){
-        Route::get('/index', [DashboardController::class, 'index'])->name('index');
+// Route::group(function(){
 
+    Route::prefix('/dashboard')->middleware(['auth'])->name('dashboard.')->group(function(){
+
+        Route::get('/index', [DashboardController::class, 'index'])->name('.index');
+
+        Route::resource('/users', UserController::class)->except('show');
+
+        // Route::post('/users/update', [UserController::class, 'update'])->name('users.update');
 
 
         // Users
-        Route::resource('users', 'UserController')->except(['show']);
+        // Route::resource('users', 'UserController')->except(['show']);
     });
 });
 

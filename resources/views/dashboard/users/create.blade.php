@@ -27,28 +27,91 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="box-body">
-                            <form action="{{ route('dashboard.users.store') }}" method="post">
+                            <form action="{{ route('dashboard.users.store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="">@lang('site.first_name')</label>
                                     <input type="text" class='form-control' name='first_name' value="{{ old('first_name') }}">
                                 </div>
+
                                 <div class="form-group">
                                     <label for="">@lang('site.last_name')</label>
                                     <input type="text" class='form-control'  name='last_name' value="{{ old('last_name') }}">
                                 </div>
+
                                 <div class="form-group">
                                     <label for="">@lang('site.email')</label>
                                     <input type="email" class='form-control'  name='email' value="{{ old('email') }}">
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="">@lang('site.img')</label>
+                                    <input type="file" class='form-control-file image'  name='img'>
+                                </div>
+                                <div class="form-group">
+                                    <img src="{{ asset('uploads/user_images/default.png') }}" class="img-thumbnail image-preview" width="100px" alt="" srcset="">
+                                </div>
+
                                 <div class="form-group">
                                     <label for="">@lang('site.password')</label>
                                     <input type="password" class='form-control' name='password'>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="">@lang('site.password_confirmation')</label>
                                     <input type="password" class='form-control' name='password_confirmation'>
                                 </div>
+
+
+                                      <!-- Custom Tabs -->
+                                <div class="card">
+                                    <div class="card-header d-flex p-0">
+                                        <h3 class="card-title p-3">@lang('site.permissions')</h3>
+                                        <div class="nav nav-tabs-custom">
+
+                                        @php
+                                            $models = ['users', 'categories', 'products'];
+                                            $maps = ['create', 'read', 'update', 'delete'];
+                                        @endphp
+
+                                        <ul class="nav nav-tabs">
+
+                                            @foreach ($models as $index=>$model)
+
+                                                <li class="{{ $index==0 ? 'active' : '' }}"><a href="'#{{ $model }}" data-toggle="tab">@lang('site.'. $model)</a></li>
+
+                                            @endforeach
+
+                                        </ul>
+                                    </div><!-- /.card-header -->
+                                    <div class="card-body">
+                                        <div class="tab-content">
+
+                                            @foreach ($models as $index=>$model)
+
+
+                                                <div class="tab-pane {{ $index==0 ? 'active' : '' }}" id="{{ $model }}">
+
+                                                    @foreach ($maps as $index=>$map)
+
+                                                        <label><input type="checkbox" name="permissions[]" value="{{ $map . '_' . $model }}">@lang('site.' . $map)</label>
+
+                                                    @endforeach
+                                                    {{-- <label><input type="checkbox" name="permissions[]" value="read_{{ $model }}">@lang('site.read')</label>
+                                                    <label><input type="checkbox" name="permissions[]" value="update_{{ $model }}">@lang('site.update')</label>
+                                                    <label><input type="checkbox" name="permissions[]" value="delete_{{ $model }}">@lang('site.delete')</label> --}}
+                                                </div>
+
+
+                                            @endforeach
+                                        <!-- /.tab-pane -->
+                                        </div>
+                                        <!-- /.tab-content -->
+                                    </div><!-- /.card-body -->
+                                </div>
+                                      <!-- ./card -->
+
+                                  <!-- END CUSTOM TABS -->
 
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.add')</button>
                             </form>
