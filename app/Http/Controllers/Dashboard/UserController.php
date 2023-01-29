@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Models\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function __construct() {
+    // public function __construct()
+    // {
 
         // $this->middleware(['permission:read_users'])->only('index');
         // $this->middleware(['permission:create_users'])->only('create');
         // $this->middleware(['permission:update_users'])->only('edit');
         // $this->middleware(['permission:delete_users'])->only('destroy');
 
-    }
+    // }
     public function index(Request $request)
     {
         // if($request->search){
@@ -31,11 +32,19 @@ class UserController extends Controller
 
         // }
 
-        $users = User::whereRoleIs('admin')->when($request->search, function($query) use ($request) {
+        $users = User::whereRoleIs('admin')->where(function ($q) use ($request) {
 
-            return $query->where('first_name', 'like', '%' . $request->search . '%')
-            ->orWhere('last_name', 'like', '%' . $request->search . '%');
-        })->paginate(5);
+            return $q->when($request->search, function ($query) use ($request) {
+
+                return $query->where('first_name', 'like', '%' . $request->search . '%')
+
+                    ->orWhere('last_name', 'like', '%' . $request->search . '%');
+            });
+        })->latest()->paginate(5);
+
+
+
+
 
         return view('dashboard.users.index', compact('users'));
     }
@@ -65,12 +74,11 @@ class UserController extends Controller
         $data['password'] = bcrypt($request->password);
 
 
-        if($request->img) {
+        if ($request->img) {
 
             Image::make($request->img)->resize(300, null, function ($constraint) {
                 $constraint->aspectRatio();
             })->save(public_path('uploads/user_images/' . $request->img->hashName()));
-
         }
 
         $data['img'] = $request->img->hashName();
@@ -89,10 +97,6 @@ class UserController extends Controller
         session()->flash('success', __('site.added_successfully'));
 
         return redirect()->route('dashboard.users.index');
-
-
-
-
     }
 
 
@@ -113,27 +117,26 @@ class UserController extends Controller
             'img' => 'required|image',
             'email' => [
                 'required',
-                Rule::unique('users')->ignore($user->id)],
+                Rule::unique('users')->ignore($user->id)
+            ],
             // 'password' => 'required|confirmed',
         ]);
 
         $data = $request->except(['permissions', 'img']);
         // $data['password'] = bcrypt($request->password);
 
-        if($request->img) {
+        if ($request->img) {
 
-            if($user->img !== 'default.png') {
+            if ($user->img !== 'default.png') {
 
-                Storage::disk('public_uploads')->delete('user_images/' . $user->img)   ;
-
+                Storage::disk('public_uploads')->delete('user_images/' . $user->img);
             }
 
             Image::make($request->img)->resize(300, null, function ($constraint) {
                 $constraint->aspectRatio();
             })->save(public_path('uploads/user_images/' . $request->img->hashName()));
 
-            $data ['img'] = $request->img->hashName();
-
+            $data['img'] = $request->img->hashName();
         }
 
         $user->update($data);
@@ -145,14 +148,13 @@ class UserController extends Controller
         session()->flash('success', __('site.updated_successfully'));
 
         return redirect()->route('dashboard.users.index');
-
     }
 
 
     public function destroy(User $user)
     {
 
-        Storage::disk('public_uploads')->delete('user_images/' . $user->img)   ;
+        Storage::disk('public_uploads')->delete('user_images/' . $user->img);
 
         $user->delete();
 

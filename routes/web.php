@@ -18,11 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard.index');
-// })->middleware(['auth'])->name('dashboard.index');
+Route::get('/dashboard', function () {
+    return view('dashboard.index');
+})->middleware(['auth'])->name('dashboard.index');
 
 
 // Auth::routes(['register' => false]);
-
-// require __DIR__.'/auth.php';
+require __DIR__.'/dashboard.php';
+require __DIR__.'/auth.php';

@@ -99,7 +99,8 @@ return [
     'action' => 'العمليات',
     'permissions' => 'الصلاحيات',
     'products' => 'المنتجات',
-    'categories' => 'الأصناف',
+    'categories' => 'الأقسام',
+    'name' => 'الإسم',
 
     'add' => 'أضف',
     'create' => 'إضافة',
