@@ -14,9 +14,9 @@ class CategoryController extends Controller
 
             return $q->when($request->search, function ($query) use ($request) {
 
-                return $query->where('name', 'like', '%' . $request->search . '%')
+                return $query->where('name', 'like', '%' . $request->search . '%');
 
-                    ->orWhere('name', 'like', '%' . $request->search . '%');
+                
             });
         })->latest()->paginate(5);
 

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\ProductController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 // use \Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -19,7 +20,7 @@ Route::group(
             Route::resources([
                 'users' => UserController::class,
                 'categories' => CategoryController::class,
-                // 'products' =>
+                'products' => ProductController::class,
             ]);
         });
     }

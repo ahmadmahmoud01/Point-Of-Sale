@@ -100,6 +100,8 @@ return [
     'permissions' => 'الصلاحيات',
     'products' => 'المنتجات',
     'categories' => 'الأقسام',
+    'products_count' => 'عدد المنتجات',
+    'related_products' => 'المنتجات المرتبطة بالقسم',
     'name' => 'الإسم',
 
     'add' => 'أضف',
@@ -118,5 +120,17 @@ return [
     'updated_successfully' => 'تم تعديل البيانات بنجاح',
     'deleted_successfully' => 'تم حذف البيانات بنجاح ',
 
-    'logout' => 'تسجيل الخروج'
+    'logout' => 'تسجيل الخروج',
+
+
+    'description' => 'الوصف',
+    'category' => 'القسم',
+    'purchase_price' => 'سعر الشراء',
+    'sale_price' => 'سعر البيع',
+    'stock' => 'العدد فى المخزن',
+    'all_categories' => 'كل الأقسام',
+    'profit' => 'المكسب',
+    'profit_percentage' => 'المكسب %'
+
+
 ];
