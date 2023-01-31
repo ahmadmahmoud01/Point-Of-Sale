@@ -130,7 +130,11 @@ return [
     'stock' => 'العدد فى المخزن',
     'all_categories' => 'كل الأقسام',
     'profit' => 'المكسب',
-    'profit_percentage' => 'المكسب %'
+    'profit_percentage' => 'المكسب %',
+
+    'clients' => 'العملاء',
+    'phone' => 'رقم الهاتف',
+    'address' => 'العنوان'
 
 
 ];
