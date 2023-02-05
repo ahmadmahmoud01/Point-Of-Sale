@@ -16,6 +16,7 @@ return [
             'categories' => 'c,r,u,d',
             'products' => 'c,r,u,d',
             'cliensts' => 'c,r,u,d',
+            'orders' => 'c,r,u,d',
             'users' => 'c,r,u,d',
             // 'payments' => 'c,r,u,d',
             // 'profile' => 'r,u'

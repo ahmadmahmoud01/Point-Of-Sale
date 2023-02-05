@@ -2,59 +2,60 @@
 
 @section('content')
 
-<div class="content-wrapper">
-    <section class="content-header">
-        <h1>@lang('site.clients')</h1>
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>@lang('site.clients')</h1>
 
-        <ol class="breadcrumb">
-            <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
-            <li> @lang('site.clients')</li>
-            <li class="active"> @lang('site.add')</li>
-        </ol>
-    </section>
+            <ol class="breadcrumb">
+                {{-- <li><a href="{{ route('dashboard.welcome') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li> --}}
+                <li><a href="{{ route('dashboard.clients.index') }}"> @lang('site.clients')</a></li>
+                <li class="active">@lang('site.add')</li>
+            </ol>
+        </section>
 
-    <section class="content">
-        <div class="container-fluid">
-            <div class="box box-primary box-bordered">
+        <section class="content">
+
+            <div class="box box-primary">
+
                 <div class="box-header">
-                    <h2 class="box-title m-3">@lang('site.clients')</h2>
+                    <h3 class="box-title">@lang('site.add')</h3>
+                </div><!-- end of box header -->
+                <div class="box-body">
 
-                    <div class="row">
-                        <h4 class="col-sm-6">@lang('site.add')</h4>
-                    </div>
-                </div>
-                @include('partials._errors')
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="box-body">
-                            <form action="{{ route('dashboard.clients.store') }}" method="post">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="">@lang('site.name')</label>
-                                    <input type="text" class='form-control' name='name' value="{{ old('name') }}">
-                                </div>
+                    @include('partials._errors')
 
-                                <div class="form-group">
-                                    <label for="">@lang('site.phone')</label>
-                                    <input type="number" class='form-control' name='phone' value="{{ old('phone') }}">
-                                </div>
+                    <form action="{{ route('dashboard.clients.store') }}" method="post">
 
-                                <div class="form-group">
-                                    <label for="">@lang('site.address')</label>
-                                    <textarea type="number" class='form-control' name='address' ">{{ old('address')}}</textarea>
-                                </div>
+                        {{ csrf_field() }}
+                        {{ method_field('post') }}
 
-
-
-                                  <!-- END CUSTOM TABS -->
-
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.add')</button>
-                            </form>
+                        <div class="form-group">
+                            <label>@lang('site.name')</label>
+                            <input type='text' name="name" class="form-control" value="{{ old('name') }}">
                         </div>
-                    </div>
-                </div><!-- /.container-fluid -->
-            </div>
-        </div>
-    </section>
-</div>
+
+                        <div class="form-group">
+                            <label>@lang('site.phone')</label>
+                            <input type='text' name="phone" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label>@lang('site.address')</label>
+                            <textarea name="address" class="form-control">{{ old('address') }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</button>
+                        </div>
+
+                    </form><!-- end of form -->
+
+                </div><!-- end of box body -->
+
+            </div><!-- end of box -->
+
+        </section><!-- end of content -->
+
+    </div><!-- end of content wrapper -->
+
 @endsection

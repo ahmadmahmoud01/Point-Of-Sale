@@ -12,7 +12,7 @@
     </section>
 
     <section class="content">
-        <h1>THis Is Dashboard</h1>
+        <h1>الصفحة الرئيسية</h1>
     </section>
 </div>
 @endsection
