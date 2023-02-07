@@ -53,4 +53,6 @@ class User extends Authenticatable
     public function getLastNameAttribute($value) {
         return ucfirst($value);
     }//end of get last name
+
+    
 }

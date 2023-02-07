@@ -110,6 +110,7 @@ return [
     'price' => 'السعر',
     'quantity' => 'الكمية',
 
+
     'add' => 'أضف',
     'create' => 'إضافة',
     'edit' => 'تعديل',
@@ -117,6 +118,15 @@ return [
     'delete' => 'حذف',
     'search' => 'بحث',
     'read' => 'عرض',
+    'show' => 'عرض',
+    'loading' => 'جار التحميل',
+    'print' => 'طباعة',
+    'show_products' => 'عرض المنتجات',
+    'created_at' => 'تم إنشاؤه',
+    'client_name' => 'اسم العميل',
+    'no_records' => 'لا توجد سجلات',
+    'edit_order' => 'تعديل الطلب',
+    'previous_orders' => 'الطلبات السابقة',
 
     'confirm_delete' => 'تأكيد الحذف',
     'yes' => 'نعم',

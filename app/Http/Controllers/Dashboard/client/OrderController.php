@@ -20,79 +20,81 @@ class OrderController extends Controller
 
     }//end of create
 
-    // public function store(Request $request, Client $client)
-    // {
-    //     $request->validate([
-    //         'products' => 'required|array',
-    //     ]);
 
-    //     $this->attach_order($request, $client);
+    public function store(Request $request, Client $client)
+    {
+        $request->validate([
+            'products' => 'required|array',
+        ]);
 
-    //     session()->flash('success', __('site.added_successfully'));
-    //     return redirect()->route('dashboard.orders.index');
+        $this->attach_order($request, $client);
 
-    // }//end of store
+        session()->flash('success', __('site.added_successfully'));
+        return redirect()->route('dashboard.orders.index');
 
-    // public function edit(Client $client, Order $order)
-    // {
-    //     $categories = Category::with('products')->get();
-    //     $orders = $client->orders()->with('products')->paginate(5);
-    //     return view('dashboard.clients.orders.edit', compact('client', 'order', 'categories', 'orders'));
+    }//end of store
 
-    // }//end of edit
 
-    // public function update(Request $request, Client $client, Order $order)
-    // {
-    //     $request->validate([
-    //         'products' => 'required|array',
-    //     ]);
+    public function edit(Client $client, Order $order)
+    {
+        $categories = Category::with('products')->get();
+        $orders = $client->orders()->with('products')->paginate(5);
+        return view('dashboard.clients.orders.edit', compact('client', 'order', 'categories', 'orders'));
 
-    //     $this->detach_order($order);
+    }//end of edit
 
-    //     $this->attach_order($request, $client);
+    public function update(Request $request, Client $client, Order $order)
+    {
+        $request->validate([
+            'products' => 'required|array',
+        ]);
 
-    //     session()->flash('success', __('site.updated_successfully'));
-    //     return redirect()->route('dashboard.orders.index');
+        $this->detach_order($order);
 
-    // }//end of update
+        $this->attach_order($request, $client);
 
-    // private function attach_order($request, $client)
-    // {
-    //     $order = $client->orders()->create([]);
+        session()->flash('success', __('site.updated_successfully'));
+        return redirect()->route('dashboard.orders.index');
 
-    //     $order->products()->attach($request->products);
+    }//end of update
 
-    //     $total_price = 0;
+    private function attach_order($request, $client)
+    {
+        $order = $client->orders()->create([]);
 
-    //     foreach ($request->products as $id => $quantity) {
+        $order->products()->attach($request->products);
 
-    //         $product = Product::FindOrFail($id);
-    //         $total_price += $product->sale_price * $quantity['quantity'];
+        $total_price = 0;
 
-    //         $product->update([
-    //             'stock' => $product->stock - $quantity['quantity']
-    //         ]);
+        foreach ($request->products as $id => $quantity) {
 
-    //     }//end of foreach
+            $product = Product::FindOrFail($id);
+            $total_price += $product->sale_price * $quantity['quantity'];
 
-    //     $order->update([
-    //         'total_price' => $total_price
-    //     ]);
+            $product->update([
+                'stock' => $product->stock - $quantity['quantity']
+            ]);
 
-    // }//end of attach order
+        }//end of foreach
 
-    // private function detach_order($order)
-    // {
-    //     foreach ($order->products as $product) {
+        $order->update([
+            'total_price' => $total_price
+        ]);
 
-    //         $product->update([
-    //             'stock' => $product->stock + $product->pivot->quantity
-    //         ]);
+    }//end of attach order
 
-    //     }//end of for each
+    private function detach_order($order)
+    {
+        foreach ($order->products as $product) {
 
-    //     $order->delete();
+            $product->update([
+                'stock' => $product->stock + $product->pivot->quantity
+            ]);
 
-    // }//end of detach order
+        }//end of for each
+
+        $order->delete();
+
+    }//end of detach order
 
 }//end of controller

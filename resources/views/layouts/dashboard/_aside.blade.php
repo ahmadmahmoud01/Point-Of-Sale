@@ -29,7 +29,7 @@
 
 
             {{-- @if (auth()->user()->hasPermission('read_orders')) --}}
-                {{-- <li><a href="{{ route('dashboard.orders.create') }}"><i class="fa fa-th"></i><span>@lang('site.orders')</span></a></li> --}}
+                <li><a href="{{ route('dashboard.orders.index') }}"><i class="fa fa-th"></i><span>@lang('site.orders')</span></a></li>
             {{-- @endif --}}
 
             {{-- @if (auth()->user()->hasPermission('read_users'))--}}
